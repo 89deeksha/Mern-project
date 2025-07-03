@@ -4,8 +4,8 @@ function Cards({items}) {
     console.log(items)
   return (
    <>
-   <div className='flex md:flex-col flex-row mt-8'>
-   <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 ">
+   <div className='flex md:flex-col flex-row mt-8 card w-90 bg-base-100 shadow-xl hover:scale-105 duration-200'>
+   <div className="  max-w-screen-2xl container mx-auto md:px-20 px-4 ">
   <figure>
     <img
       src={items.img}

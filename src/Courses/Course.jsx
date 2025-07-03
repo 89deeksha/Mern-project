@@ -3,7 +3,7 @@ import Navbar from '../Components/Navbar'
 import Courses from '../Components/Courses'
 import Footer from '../Components/Footer'
 
-console.log(list)
+
 
 function Course() {
   return (
