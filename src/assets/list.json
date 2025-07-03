@@ -1,0 +1,58 @@
+[
+    {
+        "id":1,
+        "name":"storybook",
+        "title":"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "price":0,
+        "category":"free",
+        "img":"https://www.shutterstock.com/image-photo/book-open-pages-close-up-600nw-2562942291.jpg"
+    },
+    {
+        "id":2,
+        "name":"Lifeguide",
+        "title":"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "price":0,
+        "category":"free",
+        "img":"https://www.shutterstock.com/image-photo/book-open-pages-close-up-600nw-2562942291.jpg"
+    },
+    {
+        "id":3,
+        "name":"sportsbook",
+        "title":"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "price":0,
+        "category":"free",
+        "img":"https://www.shutterstock.com/image-photo/book-open-pages-close-up-600nw-2562942291.jpg"
+    },
+    {
+        "id":4,
+        "name":"comedybook",
+        "title":"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "price":0,
+        "category":"free",
+        "img":"https://www.shutterstock.com/image-photo/book-open-pages-close-up-600nw-2562942291.jpg"
+    },
+    {
+        "id":5,
+        "name":"novel",
+        "title":"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "price":300,
+        "category":"novel",
+        "img":"https://www.shutterstock.com/image-photo/book-open-pages-close-up-600nw-2562942291.jpg"
+    },
+    {
+        "id":6,
+        "name":"horrorbook",
+        "title":"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "price":450,
+        "category":"horror",
+        "img":"https://www.shutterstock.com/image-photo/book-open-pages-close-up-600nw-2562942291.jpg"
+    },
+    {
+        "id":7,
+        "name":"thriller",
+        "title":"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "price":650,
+        "category":"thriller",
+        "img":"https://www.shutterstock.com/image-photo/book-open-pages-close-up-600nw-2562942291.jpg"
+    }
+]
