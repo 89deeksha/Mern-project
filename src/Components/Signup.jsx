@@ -1,73 +1,106 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import Login from './Login';
+import { Link } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 
 function Signup() {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  const openLoginModal = () => {
+    const modal = document.getElementById("my_modal_1");
+    if (modal) {
+      modal.showModal();
+      setIsLoginOpen(true);
+    }
+  };
+
+  const handleLoginClose = () => {
+    setIsLoginOpen(false);
+  };
+const { register, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
   return (
-    <>
-      <div>
-        <div id="my_modal_1" className="flex items-center h-screen justify-center">
-          <div className="border-[2px] shadow-md p-6 rounded-md">
-            <h3 className="font-bold text-lg ">Signup</h3>
+    <div className="flex items-center h-screen justify-center">
+      {/* Hide Signup box when Login modal is open */}
+      {!isLoginOpen && (
+        <div className="border-[2px] shadow-md p-6 rounded-md">
+          <h3 className="font-bold text-lg">Signup</h3>
 
-            <form>
-            <div className='mt-4'>
-                <span>Name</span>
-                <br />
-                <input
-                  type="text"
-                  placeholder='Enter your name'
-                  className='w-80 px-3 py-2 border rounded-md outline-none'
-                  autoComplete="email"
-                />
-              </div>
-              <div className='mt-4'>
-                <span>Email</span>
-                <br />
-                <input
-                  type="email"
-                  placeholder='Enter your email'
-                  className='w-80 px-3 py-2 border rounded-md outline-none'
-                  autoComplete="email"
-                />
-              </div>
-              <div className='mt-4'>
-                <span>Password</span>
-                <br />
-                <input
-                  type="password"
-                  autoComplete="current-password"
-                  placeholder='Enter your password'
-                  className='w-80 px-3 py-2 border rounded-md outline-none'
-                />
-              </div>
-
-              <div className='flex justify-between mt-4 items-center'>
-                <button
-                  type="submit"
-                  className='bg-pink-500 hover:bg-pink-600 px-2 py-1 border rounded-md'
-                >
-                  Signup
-                </button>
-                <p>
-                  Have account?{" "}
-                  <Link to='/' className='underline cursor-pointer text-blue-400'>
-                    Login
-                  </Link>
-                </p>
-              </div>
-            </form>
-
-            <div className="modal-action">
-              <form method="dialog">
-                <button className="btn">Close</button>
-              </form>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mt-4">
+              <label htmlFor="name">Name</label>
+              <br />
+              <input
+              {...register("text", { required: true })}
+                id="name"
+                type="text"
+                placeholder="Enter your name"
+                className="w-80 px-3 py-2 border rounded-md outline-none"
+                autoComplete="name"
+              />
+              <br />
+              {errors.text && <span className='text-red-500'>This field is required</span>}
             </div>
 
+            <div className="mt-4">
+              <label htmlFor="email">Email</label>
+              <br />
+              <input
+              {...register("email", { required: true })}
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                className="w-80 px-3 py-2 border rounded-md outline-none"
+                autoComplete="email"
+              />
+              <br />
+              {errors.email && <span className='text-red-500'>This field is required</span>}
+            </div>
+
+            <div className="mt-4">
+              <label htmlFor="password">Password</label>
+              <br />
+              <input
+              {...register("password", { required: true })}
+                id="password"
+                type="password"
+                autoComplete="new-password"
+                placeholder="Enter your password"
+                className="w-80 px-3 py-2 border rounded-md outline-none"
+              />
+              <br />
+              {errors.password && <span className='text-red-500'>This field is required</span>}
+            </div>
+
+            <div className="flex justify-between mt-4 items-center">
+              <button
+                type="submit"
+                className="bg-pink-500 hover:bg-pink-600 px-4 py-2 text-white rounded-md"
+              >
+                Signup
+              </button>
+              <p>
+                Have an account?{" "}
+                <span
+                  onClick={openLoginModal}
+                  className="underline text-blue-400 cursor-pointer"
+                >
+                  Login
+                </span>
+              </p>
+            </div>
+          </form>
+
+          <div className="modal-action mt-4 text-right">
+            <Link to='/'><button className="btn">Close</button></Link>
           </div>
         </div>
-      </div>
-    </>
-  )
+      )}
+
+      {/* Always render Login (inside modal), but notify Signup when it's closed */}
+      <Login onClose={handleLoginClose} />
+    </div>
+  );
 }
 
-export default Signup
+export default Signup;
