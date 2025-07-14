@@ -3,7 +3,7 @@ import user from './Usermodel.js';
 import bcrypt from 'bcryptjs'//for password privacy in data base
 
 
-export const Signup = async (req, res) => {
+export const Signup = async(req, res) => {
   try {
     const { Fullname, Email, password } = req.body;
 
@@ -12,7 +12,8 @@ export const Signup = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ mssg: "User already exists" });
     }
-const hashpassword=await bcrypt.hash(password,10)
+    const hashpassword = await bcrypt.hash(password.toString(), 10);
+
     const createUser = new user({
       Fullname:Fullname,
 
@@ -22,7 +23,14 @@ const hashpassword=await bcrypt.hash(password,10)
     });
 
     await createUser.save();
-    res.status(200).json({ mssg: "User created successfully" });
+    res.status(200).json({ mssg: "User created successfully",user:{
+      _id:createUser._id,
+      Fullname:createUser.Fullname,
+      Email:createUser.Email,
+      password:createUser.password
+    } 
+  
+  });
   } catch (err) {
     console.log("err", err);
     res.status(500).json({ mssg: "Internal server error" });
