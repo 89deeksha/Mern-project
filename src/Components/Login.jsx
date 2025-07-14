@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 function Login({ onClose }) {
   useEffect(() => {
@@ -20,7 +21,29 @@ function Login({ onClose }) {
     };
   }, [onClose]);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = async data => {
+    const userInfo={
+      // Fullname:data.Fullname,
+
+      Email:data.Email,
+
+      password:data.password
+    }
+    await axios.post('http://localhost:3000/users/signin',userInfo)//Api call
+    .then(res=>{
+      console.log(res.data)
+      if(res.data){
+        alert("Signup successfull")
+      }
+      //to store data in local store
+      localStorage.setItem("users",JSON.stringify(res.data))
+    }
+  )
+  .catch(err=>{
+    console.log(err)
+    alert("Error",err)
+  })
+  }
 
   
 

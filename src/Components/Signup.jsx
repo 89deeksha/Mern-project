@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Login from './Login';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 import { useForm } from "react-hook-form";
 
 function Signup() {
@@ -18,7 +19,30 @@ function Signup() {
     setIsLoginOpen(false);
   };
 const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = async data => {
+    const userInfo={
+      Fullname:data.Fullname,
+
+      Email:data.Email,
+
+      password:data.password
+    }
+    await axios.post('http://localhost:3000/users/Signup',userInfo)//Api call
+    .then(res=>{
+      console.log(res.data)
+      if(res.data){
+        alert("Signup successfull")
+      }
+      //to store data in local store
+      localStorage.setItem("users",JSON.stringify(res.data))
+    }
+  )
+  .catch(err=>{
+    console.log(err)
+    alert("Error",err)
+  })
+    // console.log(data)
+  }
   return (
     <div className="flex items-center h-screen justify-center">
       {/* Hide Signup box when Login modal is open */}
@@ -31,22 +55,22 @@ const { register, handleSubmit, formState: { errors } } = useForm();
               <label htmlFor="name">Name</label>
               <br />
               <input
-              {...register("text", { required: true })}
+              {...register("Fullname", { required: true })}
                 id="name"
-                type="text"
+                type="name"
                 placeholder="Enter your name"
                 className="w-80 px-3 py-2 border rounded-md outline-none"
                 autoComplete="name"
               />
               <br />
-              {errors.text && <span className='text-red-500'>This field is required</span>}
+              {errors.Fullname && <span className='text-red-500'>This field is required</span>}
             </div>
 
             <div className="mt-4">
               <label htmlFor="email">Email</label>
               <br />
               <input
-              {...register("email", { required: true })}
+              {...register("Email", { required: true })}
                 id="email"
                 type="email"
                 placeholder="Enter your email"
